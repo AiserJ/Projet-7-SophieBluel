@@ -84,6 +84,12 @@ h2{
 	font-size: 30px;
 	color: #1D6154
 }
+
+.projects{
+	margin-top: 100px;
+	margin-bottom: 100px;
+}
+
 nav ul {
 	display: flex;
 	align-items: center;
@@ -186,3 +192,102 @@ footer nav ul {
 	margin: 2em
 }
 
+.filters {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin-bottom: 2em;
+	flex-wrap: wrap;
+}
+
+.filters button {
+	font-family: 'Syne', sans-serif;
+	font-weight: 700;
+	font-size: 16px;
+	color: #1D6154;
+	background-color: white;
+	border: 1px solid #1D6154;
+	border-radius: 25px;
+	padding: 10px 20px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.filters button:hover,
+.filters button.active {
+	background-color: #1D6154;
+	color: white;
+}
+
+ul li a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+/* Connexion */
+
+.login-container {
+  text-align: center;
+  max-width: 400px;
+  margin: 80px auto;
+}
+
+.login-container h2 {
+  font-size: 28px;
+  color: #1D6154;
+  margin-bottom: 40px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.login-form label {
+  text-align: left;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.login-form input {
+  padding: 12px;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border-radius: 3px;
+  font-size: 16px;
+}
+
+.login-form button {
+  margin-top: 10px;
+  padding: 12px;
+  background-color: #1D6154;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: 'Syne', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 250px;
+  margin: auto;
+}
+
+.login-form button:hover {
+  background-color: #1D6154;
+}
+
+.forgot-password {
+  margin-top: 15px;
+  font-size: 13px;
+  color: #1e2f23;
+  text-decoration: underline;
+  align-self: center;
+}
+
+.login-error {
+  font-size: 14px;
+  color: crimson;
+}
