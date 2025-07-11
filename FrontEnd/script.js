@@ -86,13 +86,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const loginLink = document.getElementById('login-link');
 
   if (token && loginLink) {
-    // Met à jour le lien pour refléter l'état connecté
+    // Met à jour le lien pour changer l'état connecté
     loginLink.textContent = 'Logout';
     loginLink.style.fontWeight = 'bold';
     loginLink.style.cursor = 'pointer';
-    loginLink.removeAttribute('href'); // empêche d'aller vers login.html
+    loginLink.removeAttribute('href'); // empêche d'aller vers login.html, facile
 
-    // Gèrer la déconnexion
+    // Gestion de la déconnexion
     loginLink.addEventListener('click', () => {
       localStorage.removeItem('token');
       window.location.href = 'login.html';
@@ -113,14 +113,14 @@ document.addEventListener('DOMContentLoaded', () => {
       filtersSection.style.display = 'none';
     }
 
-    // L'Ajoute du bouton  "Modifier"
+    // Ajoute du bouton  "Modifier"
     const portfolioTitle = document.querySelector('#portfolio h2');
     if (portfolioTitle) {
       const editBtn = document.createElement('button');
       editBtn.classList.add('edit-button');
       editBtn.innerHTML = `<i class="fa-solid fa-pen-to-square"></i> modifier`;
 
-      // Style comme sur la maquette.
+      // Style
       editBtn.style.marginLeft = '10px';
       editBtn.style.cursor = 'pointer';
       editBtn.style.background = 'none';
@@ -131,4 +131,84 @@ document.addEventListener('DOMContentLoaded', () => {
       portfolioTitle.appendChild(editBtn);
     }
   }
+});
+
+
+/////////////////////////////////////
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  ////////////// Sélecteurs ///////////////
+  const editBtn      = document.querySelector('.edit-button');   // créé après login
+  const overlay      = document.getElementById('modal-overlay');
+  const galleryModal = document.querySelector('.modal-gallery');
+  const closeBtn     = document.querySelector('.modal-close');
+
+  ///////////// Helpers //////////////
+  function renderModalGallery() {
+    galleryModal.innerHTML = '';           // reset
+
+    works.forEach(w => {
+      const fig   = document.createElement('figure');
+      const img   = document.createElement('img');
+      const trash = document.createElement('button');
+
+      img.src  = w.imageUrl;
+      img.alt  = w.title;
+
+      trash.className = 'delete-btn';
+      trash.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+      trash.title     = 'Supprimer';
+      trash.addEventListener('click', () => deleteWork(w.id));
+
+      fig.append(img, trash);
+      galleryModal.appendChild(fig);
+    });
+  }
+
+  function openModal() {
+    renderModalGallery();
+    overlay.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';   // bloque le scroll fond
+  }
+
+  function closeModal() {
+    overlay.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+
+  ///////// Suppression /////////
+  
+  function deleteWork(id) {
+    const token = localStorage.getItem('token');
+    if (!token) { alert('Non autorisé'); return; }
+
+    fetch(`${apiUrl}works/${id}`, {
+      method: 'DELETE',
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+
+    .then(res => {
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      // 1) Mets à jour le cache local
+      works = works.filter(w => w.id !== id);
+      // 2) Rafraîchis les deux galeries
+      renderModalGallery();
+      gallerySection.innerHTML = '';
+      afficheWorks(works);
+    })
+    .catch(err => {
+      console.error(err);
+      alert('Échec de la suppression');
+    });
+  }
+
+  ////////// Écouteurs //////////
+
+  editBtn?.addEventListener('click', openModal);
+  closeBtn?.addEventListener('click', closeModal);
+  overlay?.addEventListener('click', e => {
+    if (e.target === overlay) closeModal();   // clic hors modale
+  });
 });
