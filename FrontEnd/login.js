@@ -49,7 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       localStorage.setItem('token', data.token);
       window.location.href = 'index.html';
-    } catch (err) {
+    } 
+    catch (err) {
       console.error('[login error]', err);
       showError('Email ou mot de passe invalide');
     } finally {
