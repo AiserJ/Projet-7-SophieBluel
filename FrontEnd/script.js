@@ -13,6 +13,8 @@ window.addEventListener('load', () => {
   }
 });
 
+//////////////////////////// Partie 1 ////////////////////////////////////
+
 /////// Affichage de la gallerie ///////
 const gallerySection = document.querySelector('.gallery');
 const apiUrl = 'http://localhost:5678/api/';
@@ -56,10 +58,9 @@ fetch(apiUrl + 'works')
   });
   
 
-const filters = document.querySelector('.filters');
-
-
 ///// Récupération des données catégories ///// 
+
+const filters = document.querySelector('.filters');
 
 fetch(apiUrl + "categories")
   .then(response => {
@@ -104,6 +105,8 @@ filters.addEventListener('click', (e) => {
   }
 });
 
+//////////////////////////// Partie 2 ////////////////////////////////////
+
 /////// Stockage du token de connexion ///////
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -147,6 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+//////////////////////////// Partie 3 ////////////////////////////////////
 
 ///// Page principale après connexion ////
 
@@ -177,8 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-/////////////////////////////////////
-
+//////////////////////////// Partie 4 ////////////////////////////////////
 
 document.addEventListener('DOMContentLoaded', () => {
   ////////// Sélecteurs ///////////
@@ -208,7 +211,7 @@ function renderModalGallery() {
     galleryModal.appendChild(fig);
   });
 
-  ///  Ecouteur sur le bouton d'ajour & mini fonction ///
+  ///  Ecouteur sur le bouton d'ajout & mini fonction ///
 
   const addPhotoBtn = document.querySelector('.modal-add');
   addPhotoBtn?.addEventListener('click', () => {
@@ -254,7 +257,7 @@ function renderModalGallery() {
     });
   }
 
-  ////////// Écouteurs //////////
+////////// Écouteurs //////////
 
   editBtn?.addEventListener('click', openModal);
   closeBtn?.addEventListener('click', closeModal);
@@ -343,6 +346,8 @@ backBtn?.addEventListener('click', () => {
   overlay.classList.remove('hidden');           // réaffiche la galerie
 });
 
+//////////////////////////// Partie 6 ////////////////////////////////////
+
   ///// Envoi du formulaire //////
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -382,7 +387,12 @@ backBtn?.addEventListener('click', () => {
       placeholder.style.display = 'flex';
       validateBtn.classList.remove('active');
       validateBtn.setAttribute('disabled', 'disabled');
+
+      placeholder.innerHTML = `
+      <i class="fa-solid fa-image"></i>
+      <p>+ Ajouter photo<br>jpg, png : 4mo max</p>`;
     })
+
     .catch(err => {
       console.error('Erreur lors de l’ajout :', err);
       alert("L'ajout a échoué");

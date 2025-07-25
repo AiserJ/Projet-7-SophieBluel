@@ -15,10 +15,12 @@
 </head>
 <body>
 <header>
-	<h1>Sophie Bluel<span>Architecte d'intérieur</span></h1>
+	<h1>
+		Sophie Bluel<span>Architecte d'intérieur</span>
+	</h1>
 	<nav>
 		<ul>
-			<li><a href="projets">projets</a></li>
+			<li><a href="index.html">projets</a></li>
 			<li><a href="contact">contact</a></li>
 			<li><a href="login.html" id="login-link">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
@@ -87,10 +89,10 @@
         <label for="image" class="upload-label">
           <img id="preview-image" src="" alt="" style="display:none; max-height:150px; object-fit:cover; margin-bottom:10px;">
           <div class="placeholder">
-            <i class="fa-regular fa-image fa-2x"></i><br>
-            + Ajouter photo<br>
-            <small>jpg, png : 4mo max</small>
-          </div>
+  			<i class="fa-solid fa-image"></i>
+  			<p>+ Ajouter photo<br>jpg, png : 4mo max</p>
+  			<img id="preview-image" style="display: none;" />
+			</div>
           <input type="file" id="image" name="image" accept="image/png, image/jpeg" hidden required>
         </label>
       </div>
